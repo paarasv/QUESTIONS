@@ -1,0 +1,21 @@
+public class maze1 {
+    public static void main(String[] args) {
+        path("",3,3);
+
+    }
+    static void path(String s , int r, int c) {
+        if(r==1 || c==1){
+            System.out.println(s);
+            return;
+        }
+        if(r>1){
+            path(s+"v",r-1,c);
+        }
+        if(c>1){
+            path(s+"h",r,c-1);
+        }
+        if(r>1&&c>1){
+            path(s+"d",r-1,c-1);
+        }
+    }
+}
