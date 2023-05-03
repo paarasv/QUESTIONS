@@ -1,0 +1,68 @@
+public class SearchLinkedList {
+
+        class Node{
+            int data; // data initialize kara hai
+            Node next; // jaisa node wesa int ( variable type )
+            public Node(int data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        public Node head = null; // head or tail banaya hai
+       public Node tail = null;
+
+       public void addNode(int data){
+    Node newnode = new Node(data); // naya node banay hai , newnode karke
+    if(head==null){
+        head= newnode ;
+        tail = newnode ;
+    }
+    else {
+        tail.next= newnode ; // point kar raha hai
+        tail=newnode;// khud bhi to newnode hai
+
+        }
+    }
+    public void searchnode(int data){
+           Node current = head; // pointer jaisa samj lo
+           int i = 1;
+           boolean flag = false ;
+           if ( head==null) {
+               System.out.println(" list is empty ");
+           }
+           else {
+               while(current != null) {
+                   if (current.data == data) {
+                       flag = true;
+                       break;
+                   }
+                   i++;
+                   current = current.next; // jo current hai vpo current.next ban jayega
+               }
+           }
+           if(flag){
+               System.out.println("present node at " + i);
+           }
+           else{
+               System.out.println(" not present node ");
+           }
+
+
+    }
+    public static void main(String[] args) {
+
+        SearchLinkedList sList = new SearchLinkedList();
+
+        //Add nodes to the list
+        sList.addNode(1);
+        sList.addNode(28);
+        sList.addNode(35);
+        sList.addNode(4);
+
+        //Search for node 2 in the list
+        sList.searchnode(28);
+        //Search for a node  in the list
+        sList.searchnode(7);
+    }
+}
