@@ -1,0 +1,75 @@
+public class number_element {
+
+
+        class Node{
+            int data; // data initialize kara hai
+            Node next; // jaisa node wesa int ( variable type )
+            public Node(int data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        public Node head = null; // head or tail banaya hai
+        public Node tail = null;
+
+        public void addNode(int data){
+            Node newnode = new Node(data); // naya node banay hai , newnode karke
+            if(head==null){
+                head= newnode ;
+                tail = newnode ;
+            }
+            else {
+                tail.next= newnode ; // point kar raha hai
+                tail=newnode;// khud bhi to newnode hai
+
+            }
+        }
+        // yaha tak apan ne list ka poora structure banaya hai
+        public void searchnode (){
+            Node current = head; // pointer jaisa samj lo
+            int count = 0;
+            //boolean flag = false ;
+            if ( head==null) {
+                System.out.println(" list is empty ");
+            }
+            else {
+                while(current != null) {
+                   // if (current.data == data) {
+                        //flag = true;
+                        //break;
+                    count++;
+                    current = current.next;
+                    //System.out.println(count);
+
+                    }
+                   // i++;
+                   // current = current.next; // jo current hai vpo current.next ban jayega
+                System.out.println(count);
+                }
+            }
+            /*if(flag){
+                System.out.println("present node at " + i);
+            }
+            else{
+                System.out.println(" not present node ");
+            }*/
+
+
+
+        public static void main(String[] args) {
+
+            number_element sList = new number_element();
+
+            //Add nodes to the list
+            sList.addNode(1);
+            sList.addNode(28);
+            sList.addNode(35);
+            sList.addNode(4);
+
+            /*Search for node 2 in the list
+            sList.searchnode(28);
+            //Search for a node  in the list
+            sList.searchnode(7); */
+            sList.searchnode();
+        }
