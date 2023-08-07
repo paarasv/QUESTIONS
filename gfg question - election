@@ -1,0 +1,36 @@
+class Solution{
+  public:
+  
+    //Function to return the name of candidate that received maximum votes.
+    vector<string> winner(string arr[],int n)
+    {
+    unordered_map<string,int> umap;
+    for(int i =0; i<n; i++){
+        umap[arr[i]]++;
+    }
+    
+    string naam ="";
+    int max = 0;
+    for(auto it=umap.begin(); it!=umap.end(); it++){
+        string name = it->first;
+        int vote = it->second;
+        
+        if(vote>max){
+            max=vote;
+            naam=name;
+        } else {
+            if(vote==max){
+                if(name<naam){
+                    naam=name;
+                }
+            }
+                
+            
+        }
+    }
+        vector<string> ans;
+        ans.push_back(naam);
+        string temp = to_string(max);
+        ans.push_back(temp);
+    }
+};
