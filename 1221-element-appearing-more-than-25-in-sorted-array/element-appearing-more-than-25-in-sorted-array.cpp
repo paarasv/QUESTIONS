@@ -6,7 +6,7 @@ public:
         int quarter = arr.size() / 4;
 
         
-        for (int i = 0; i < arr.size() - quarter; i++) {
+        for (int i = 0; i < arr.size() ; i++) {
             if (arr[i] == arr[i + quarter]) {
                 return arr[i];
             }
