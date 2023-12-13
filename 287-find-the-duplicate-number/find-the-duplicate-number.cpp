@@ -1,21 +1,22 @@
-#include <vector>
-#include <map>
-
 class Solution {
 public:
     int findDuplicate(std::vector<int>& nums) {
-        std::map<int, int> mp;
-        for (int i = 0; i < nums.size(); i++) {
-            mp[nums[i]]++;
+        int tortoise = nums[0];
+        int hare = nums[0];
+
+        // Phase 1: Detect if there's a cycle
+        do {
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        } while (tortoise != hare);
+
+        // Phase 2: Find the entrance to the cycle
+        tortoise = nums[0];
+        while (tortoise != hare) {
+            tortoise = nums[tortoise];
+            hare = nums[hare];
         }
 
-        for (auto i : mp) {
-            if (i.second >= 2) {
-                return i.first; // Return the first duplicate found
-            }
-        }
-
-        // If no duplicates are found, you might want to handle this case appropriately
-        return -1; // Replace -1 with a default value or handle the case when no duplicate is found.
+        return hare; // or tortoise, as they both point to the entrance of the cycle
     }
 };
