@@ -16,7 +16,7 @@ public:
             if (nums[i + 1] - nums[i] == 1) {
                 count++;
                 maxi = std::max(maxi, count);
-            } else if (nums[i + 1] != nums[i]) {
+            } else if (nums[i+1]!= nums[i]) {
                 count = 1;  // Reset count if there is a gap or duplicates.
             }
         }
