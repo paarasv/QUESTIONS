@@ -14,8 +14,11 @@ public:
     int maxDepth(TreeNode* root) {
         if(root == NULL) return 0;
         int lh = maxDepth(root->left);
+        cout<< lh <<" ";
         int rh = maxDepth(root->right);
+        cout<< rh <<" ";
         int maxi = 1+max(lh,rh);
+        cout<< maxi <<" ";
         return maxi;
     }
 };
