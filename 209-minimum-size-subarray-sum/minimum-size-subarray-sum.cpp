@@ -4,24 +4,20 @@
 class Solution {
 public:
     int minSubArrayLen(int target, std::vector<int>& nums) {
-        int i = 0;
-        int j = 0; // Initialize j to 0
-        int mini = INT_MAX;
         int n = nums.size();
-        long long sum = 0;
+        int mini = INT_MAX; // Initialize the minimum length of subarray
+        int sum = 0; // Initialize the sum of the current window
+        int left = 0; // Initialize the left pointer
         
-        while (j < n) { // Change loop condition
-            sum += nums[j]; // Add nums[j] to sum
+        for (int right = 0; right < n; right++) { // Iterate over the array
+            sum += nums[right]; // Add the current element to the sum
             
-            while (sum >= target) { // Check if sum exceeds or equals target
-                mini = std::min(mini, j - i + 1); // Update mini
-                sum -= nums[i]; // Remove nums[i] from sum
-                i++; // Move i forward
+            while (sum >= target) { // Shrink the window as long as the sum is greater than or equal to the target
+                mini = std::min(mini, right - left + 1); // Update the minimum length of subarray
+                sum -= nums[left++]; // Remove the leftmost element from the window
             }
-            
-            j++; // Move j forward
         }
         
-        return (mini == INT_MAX) ? 0 : mini; // Return 0 if mini is not updated
+        return (mini == INT_MAX) ? 0 : mini; // Return the minimum length of subarray
     }
 };
