@@ -11,37 +11,45 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        int length = 0;
-        ListNode* curr = head;
-        
-        // Calculate the length of the linked list
-        while (curr != nullptr) {
-            length++;
-            curr = curr->next;
+        ListNode* temp = head;
+        ListNode* prev = nullptr;
+        int c = 0;
+
+        // Count the number of nodes in the list
+        while (temp != nullptr) {
+            c++;
+            temp = temp->next;
         }
 
-        // Find the position to remove
-        int traverseTill = length - n - 1;
-        int i = 0;
-        curr = head;
+        // If there's only one node in the list, return nullptr
+        if (c == 1) {
+            return nullptr;
+        }
 
-        // If the head needs to be removed
-        if (traverseTill == -1) {
-            head = head->next;
-            delete curr;
+        temp = head;
+        int k = c - n;
+
+        // Traverse to the (c-n)th node
+        while (k > 0) {
+            prev = temp;
+            temp = temp->next;
+            k--;
+        }
+
+        // If the last node is to be removed
+        if (n == 1) {
+            prev->next = nullptr;
             return head;
         }
 
-        // Traverse to the node before the one to be removed
-        while (i < traverseTill) {
-            curr = curr->next;
-            i++;
+        // If the first node is to be removed
+        if (n == c) {
+            head = head->next;
+            return head;
         }
 
         // Remove the nth node from the end
-        ListNode* temp = curr->next;
-        curr->next = curr->next->next;
-        delete temp;
+        prev->next = temp->next;
 
         return head;
     }
