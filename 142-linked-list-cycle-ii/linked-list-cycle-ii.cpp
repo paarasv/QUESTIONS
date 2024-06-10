@@ -23,31 +23,26 @@ public:
 
         ListNode *slow = head;
         ListNode *fast = head;
-        bool hasCycle = false;
-
-        // Find if there is a cycle
-        while (fast->next != nullptr && fast->next->next != nullptr) {
-            slow = slow->next;
-            fast = fast->next->next;
-            if (slow == fast) {
-                hasCycle = true;
+        bool hascycle = false;
+        while(fast!=NULL&&fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                hascycle=true;
                 break;
             }
-        }
 
-        // If there is no cycle, return nullptr
-        if (!hasCycle) {
-            return nullptr;
         }
+        if(!hascycle){
+            return NULL;
+        } 
 
-        // Reset slow to head, and start moving both slow and fast at the same pace
-        slow = head;
-        while (slow != fast) {
-            slow = slow->next;
-            fast = fast->next;
+        slow=head;
+        while(slow!=fast){
+            slow=slow->next;
+            fast=fast->next;
+
         }
-
-        // They will meet at the entry point of the cycle
         return slow;
     }
 };
