@@ -7,16 +7,17 @@ public:
         while(i<n){
         if(st.empty()){
             st.push(s[i]);
-            i++;
+           // i++;
         } else if(st.top()=='(' && s[i]==')'||
                   st.top()=='[' && s[i]==']'||
                   st.top()=='{' && s[i]=='}'){
                     st.pop();
-                    i++;
+                    //i++;
                   } else {
                     st.push(s[i]);
-                    i++;
+                    //i++;
                   }
+                  i++;
     }
     if(st.size()==0){
         return true ;
