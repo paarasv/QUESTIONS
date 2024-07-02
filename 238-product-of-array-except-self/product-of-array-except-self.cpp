@@ -2,28 +2,23 @@ class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
-        vector<int> ans(n, 0);
-        int product = 1;
-        int zeros = 0;
         
-        for (int num : nums) {
-            if (num == 0) {
-                zeros++;
-                continue;
-            }
-            product *= num;
+        std::vector<int> prefix(n, 1);
+        std::vector<int> suffix(n, 1);
+        
+        for (int i = 1; i < n; ++i) {
+            prefix[i] = prefix[i - 1] * nums[i - 1];
         }
-
-        if (zeros == 1) {
-            for (int i = 0; i < n; i++) {
-                ans[i] = nums[i] == 0 ? product : 0;
-            }
-        } else if (zeros == 0) {
-            for (int i = 0; i < n; i++) {
-                ans[i] = product / nums[i];
-            }
+        
+        for (int i = n - 2; i >= 0; --i) {
+            suffix[i] = suffix[i + 1] * nums[i + 1];
         }
-
-        return ans;
+        
+        std::vector<int> answer(n);
+        for (int i = 0; i < n; ++i) {
+            answer[i] = prefix[i] * suffix[i];
+        }
+        
+        return answer;
     }
 };
