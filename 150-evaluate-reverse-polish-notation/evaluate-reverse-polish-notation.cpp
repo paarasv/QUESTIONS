@@ -1,39 +1,30 @@
-#pragma GCC optimize("O3", "unroll-loops")
 class Solution {
 public:
-    stack<int> st;
-    void operation(string& op){
-        if (st.empty()) return;
-        
-        int n2=st.top();
-        st.pop();
-        
-        if (st.empty()) return;
-        
-        int n1=st.top();
-        st.pop();
-        
-        int x;
-        switch(op[0]){
-            case '+': x=n1+n2; break;
-            case '-': x=n1-n2; break;
-            case '*': x=n1*n2; break;
-            case '/': x=n1/n2; break;
-        }
-        st.push(x);
-    }
     int evalRPN(vector<string>& tokens) {
-         for(string& s: tokens){
-            if (s=="+"|| s=="-" || s=="*"|| s=="/")
-                operation(s);
-            else{
-                int x=stoi(s);
-            //    cout<<x<<endl;
-                st.push(x);
-            }            
+        stack<int> st;
+        for (auto x : tokens) {
+            if (x == "/" || x == "+" || x == "-" || x == "*") {
+                int opr2 = st.top(); st.pop();
+                int opr1 = st.top(); st.pop();
+                if (x == "+") {
+                    st.push(opr1 + opr2);
+                }
+                if (x == "-") {
+                    st.push(opr1 - opr2);
+                }
+                if (x == "/") {
+                    st.push(opr1 / opr2);
+                }
+                if (x == "*") {
+                    st.push(opr1 * opr2);
+                }
+            } else {
+                stringstream string_to_data(x);
+                int data;
+                string_to_data >> data;
+                st.push(data);
+            }
         }
-        if (st.empty()) return 0;
-        
         return st.top();
     }
 };
