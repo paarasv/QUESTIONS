@@ -5,12 +5,9 @@ public:
         priority_queue<pi, vector<pi>,greater<pi>>pq;
         multimap<int,int>mp;
         for(int i=0;i<arr.size(); i++){
-            int val = abs(x-arr[i]);
-            mp.insert({arr[i] , val});
+            pq.push(make_pair(abs(x-arr[i]),arr[i]));
         }
-        for(auto ch : mp){
-            pq.push(make_pair(ch.second, ch.first));
-        }
+        
         vector<int>temp;
         for(int i = 0; i < k; i++) {
             pair<int, int> ans = pq.top();
