@@ -1,28 +1,33 @@
+#include <vector>
+#include <string>
+#include <stack>
+using namespace std;
+
 class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
         stack<int> st;
-        for (auto x : tokens) {
-            if (x == "/" || x == "+" || x == "-" || x == "*") {
-                int opr2 = st.top(); st.pop();
-                int opr1 = st.top(); st.pop();
-                if (x == "+") {
-                    st.push(opr1 + opr2);
+        for (int i = 0; i < tokens.size(); i++) {
+            if (tokens[i] == "+" || tokens[i] == "*" || tokens[i] == "-" || tokens[i] == "/") {
+                int opr1 = st.top();
+                st.pop();
+                int opr2 = st.top();
+                st.pop();
+                if (tokens[i] == "+") {
+                    st.push(opr2 + opr1);  // Correct order
                 }
-                if (x == "-") {
-                    st.push(opr1 - opr2);
+                if (tokens[i] == "-") {
+                    st.push(opr2 - opr1);  // Correct order
                 }
-                if (x == "/") {
-                    st.push(opr1 / opr2);
+                if (tokens[i] == "/") {
+                    st.push(opr2 / opr1);  // Correct order
                 }
-                if (x == "*") {
-                    st.push(opr1 * opr2);
+                if (tokens[i] == "*") {
+                    st.push(opr2 * opr1);  // Correct order
                 }
             } else {
-                stringstream string_to_data(x);
-                int data;
-                string_to_data >> data;
-                st.push(data);
+                int num = stoi(tokens[i]);
+                st.push(num);
             }
         }
         return st.top();
