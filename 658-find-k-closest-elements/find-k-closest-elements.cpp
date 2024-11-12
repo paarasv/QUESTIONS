@@ -13,7 +13,7 @@ public:
         }
 
         vector<int> vt;
-        while (k-- && !pq.empty()) {
+        while (k--) {
             int ans = pq.top().second;
             vt.push_back(ans);
             pq.pop();
