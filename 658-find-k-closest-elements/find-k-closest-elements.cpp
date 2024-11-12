@@ -1,21 +1,25 @@
-typedef pair<int,int>pi;
 class Solution {
 public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-        priority_queue<pi, vector<pi>,greater<pi>>pq;
-        multimap<int,int>mp;
-        for(int i=0;i<arr.size(); i++){
-            pq.push(make_pair(abs(x-arr[i]),arr[i]));
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        vector<pair<int, int>> res;
+
+        for (auto a : arr) {
+            res.push_back(make_pair(abs(a - x), a));
         }
-        
-        vector<int>temp;
-        for(int i = 0; i < k; i++) {
-            pair<int, int> ans = pq.top();
-            temp.push_back(ans.second);
+
+        for (int i = 0; i < res.size(); ++i) {
+            pq.push(res[i]);
+        }
+
+        vector<int> vt;
+        while (k-- && !pq.empty()) {
+            int ans = pq.top().second;
+            vt.push_back(ans);
             pq.pop();
         }
-        sort(temp.begin(), temp.end());
-        return temp;
 
-    }
+        sort(vt.begin(), vt.end());
+        return vt;
+    }      
 };
